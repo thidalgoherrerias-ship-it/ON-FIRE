@@ -3,149 +3,113 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ON FIRE 🔥 - La app que enciende conexiones</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<title>ON FIRE 🔥</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins', sans-serif;
-}
-
 body{
-background:#0f0f0f;
-color:white;
-overflow-x:hidden;
-}
-
-header{
-height:100vh;
+margin:0;
+font-family:Arial;
 background:linear-gradient(135deg,#FF3B3F,#FF6A00);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
+color:white;
 text-align:center;
-padding:20px;
 }
 
-h1{
-font-size:4rem;
-font-weight:700;
+.container{
+margin-top:80px;
 }
 
-p{
-font-size:1.2rem;
-margin-top:20px;
-max-width:600px;
-}
-
-.btn{
-margin-top:30px;
-padding:15px 35px;
+input{
+padding:12px;
+margin:8px;
 border:none;
-border-radius:50px;
+border-radius:20px;
+width:220px;
+}
+
+button{
+padding:12px 25px;
+border:none;
+border-radius:30px;
 background:white;
 color:#FF3B3F;
-font-weight:600;
-font-size:16px;
+font-weight:bold;
 cursor:pointer;
-transition:0.3s;
-}
-
-.btn:hover{
-background:black;
-color:white;
-}
-
-.section{
-padding:100px 20px;
-text-align:center;
-}
-
-.cards{
-display:flex;
-justify-content:center;
-flex-wrap:wrap;
-gap:30px;
-margin-top:50px;
+margin-top:10px;
 }
 
 .card{
-background:#1a1a1a;
-padding:40px;
-border-radius:20px;
-width:300px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
-background:#222;
-}
-
-footer{
+background:#111;
 padding:30px;
-text-align:center;
-background:black;
-margin-top:50px;
-color:#888;
+border-radius:20px;
+display:inline-block;
 }
-
-@media(max-width:768px){
-h1{
-font-size:2.5rem;
-}
-.cards{
-flex-direction:column;
-align-items:center;
-}
-}
-
 </style>
 </head>
+
 <body>
 
-<header>
+<div class="container">
 <h1>🔥 ON FIRE</h1>
-<p>La aplicación de citas donde las conexiones son reales, intensas y seguras.</p>
-<button class="btn">Descargar Próximamente</button>
-</header>
-
-<section class="section">
-<h2>¿Cómo funciona?</h2>
-
-<div class="cards">
 
 <div class="card">
-<h3>🔥 Match Inteligente</h3>
-<p>Algoritmo avanzado basado en intereses y compatibilidad real.</p>
-</div>
 
-<div class="card">
-<h3>💬 Chat Privado</h3>
-<p>Conecta solo cuando ambos sienten la chispa.</p>
-</div>
+<h3>Registro</h3>
+<input type="email" id="email" placeholder="Email"><br>
+<input type="password" id="password" placeholder="Contraseña"><br>
+<button onclick="register()">Crear cuenta</button>
 
-<div class="card">
-<h3>🔒 Seguridad Total</h3>
-<p>Perfiles verificados y protección contra cuentas falsas.</p>
-</div>
+<hr style="margin:20px 0;">
+
+<h3>Login</h3>
+<button onclick="login()">Iniciar sesión</button>
 
 </div>
-</section>
 
-<section class="section" style="background:#141414;">
-<h2>Prepárate para encender tu vida</h2>
-<p style="margin-top:20px;">Muy pronto disponible en iOS y Android.</p>
-<button class="btn">Quiero estar en la beta 🔥</button>
-</section>
+</div>
 
-<footer>
-© 2026 ON FIRE - Todos los derechos reservados
-</footer>
+<script>
+
+// 🔥 PEGA AQUÍ TUS DATOS REALES
+const supabase = window.supabase.createClient(
+"PEGA_AQUI_TU_PROJECT_URL",
+"PEGA_AQUI_TU_PUBLISHABLE_KEY"
+);
+
+async function register(){
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+const { data, error } = await supabase.auth.signUp({
+email: email,
+password: password,
+});
+
+if(error){
+alert(error.message);
+}else{
+alert("Cuenta creada 🔥");
+}
+}
+
+async function login(){
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+
+const { data, error } = await supabase.auth.signInWithPassword({
+email: email,
+password: password,
+});
+
+if(error){
+alert(error.message);
+}else{
+alert("Bienvenido a ON FIRE 🔥");
+}
+}
+
+</script>
 
 </body>
 </html>
